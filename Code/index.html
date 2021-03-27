@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" value="notranslate">
+  <title>Blockly Demo</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- <script src="../../blockly/appengine/storage.js"></script> -->
+  <script src="//unpkg.com/tiny-save-as"></script>
+  <script src="../blockly/blockly_compressed.js"></script>
+  <script src="../blockly/blocks_compressed.js"></script>
+  <script src="../blockly/arduino_compressed.js"></script>
+  <script src="spin.js"></script>
+  <script src="code.js"></script>
+</head>
+<body>
+  <table width="100%" height="100%">
+    <tr>
+      <td colspan=2>
+        <table width="100%">
+          <tr id="tabRow" height="1em">
+            <td id="tab_blocks" class="tabon">Block</td>
+            <td class="tabmin tab_collapse">&nbsp;</td>
+            <td id="tab_arduino" class="taboff tab_collapse">Arduino</td>
+            <td class="tabmin tab_collapse">&nbsp;</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_code" class="taboff">
+              <select id="code_menu"></select>
+            </td>
+            <td class="tabmax">
+              <input type="file" id="load" style="display: none;"/>
+              <button id="openButton" title="Load project">
+                <img src="../blockly/media/Icon_open.jpeg" class="icon21">
+              </button>
+              <button id="saveButton" title="Save project">
+                <img src="../blockly/media/save_icon.png" class="icon21">
+              </button>
+              <button id="trashButton" title="Remove project">
+                <img src='../blockly/media/Icon_trash.png' class="icon21">
+              </button>
+              <button id="runButton"  title="Run project">
+                <img src='../blockly/media/icon_run.jpg' class="icon21">
+              </button>
+            </td>
+            <td class="farSide">
+              <select id="languageMenu"></select>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td height="100%" colspan=2 id="content_area">
+      </td>
+    </tr>
+  </table>
+  <div id="content_blocks" class="content"></div>
+  <pre id="content_arduino" class="content prettyprint lang-arduino"></pre>
+  <textarea id="content_xml" class="content" wrap="off"></textarea>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox"  style="display: none ">
+    <category name="Logic" >
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_boolean"></block>
+      <block type="logic_null"></block>
+    </category>
+    <category name="Loops">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_forEach"></block>
+      <block type="controls_flow_statements"></block>
+    </category>
+    <category name="Text">
+      <block type="text"></block>    
+      <block type="text_join"></block> 
+      <block type="text_append"></block>    
+      <block type="text_length"></block>  
+      <!-- <block type="text_isEmpty"></block>     -->
+      <block type="text_trim"></block>
+      <!-- <block type="text_print"></block>   -->
+      <block type="text_prompt_ext"></block>        
+    </category>
+    <category name="Math">
+      <block type="math_number"></block>
+      <block type="math_arithmetic"></block>
+      <block type="math_single"></block>
+      <block type="math_constant"></block>
+      <block type="math_number_property"></block>
+      <block type="math_change"></block>
+      <block type="math_modulo"></block>
+      <block type="math_constrain"></block>
+      <block type="math_random_int"></block>
+      <block type="math_random_float"></block>
+    </category> 
+    <!-- <category name='Lists'>
+      <block type="lists_create_empty"></block>
+      <block type="lists_create_with"></block>
+      <block type="lists_repeat"></block>
+      <block type="lists_length"></block>
+      <block type="lists_indexOf"></block>
+    </category>    -->
+    <sep></sep>
+    <category name="Variable" custom="VARIABLE">
+
+    </category>
+
+    <category name="Function" custom="PROCEDURE"></category>
+    <!-- <sep></sep> -->
+    <!-- <category name="Move">
+      <block type="motor_port"></block>
+      <block type="servo"></block> -->
+      <!-- <block type="all_motor_port"></block>
+      <block type="servo_move"></block> -->
+      <!-- <block type="motor_m12"></block>  -->
+      <!-- <block type="servo_read_degrees"></block>
+    </category>
+    <category name="Sensor">
+      <block type="ultrasonic_sensor"></block>
+      <block type="temperature_sensor"></block>
+      <block type="ulstrasonic"></block>
+
+      
+    </category>
+    <category name="Show terminal">
+      <block type="serial_print"></block>
+    </category>
+    <category name="Input/outPut">
+      <block type="inout_digital_write"></block>
+      <block type="inout_digital_read"></block>
+      <block type="inout_analog_write"></block>
+      <block type="inout_analog_read"></block>       
+    </category> -->
+    <sep></sep>
+    <category name='LED'>
+      <block type="led_w_rbg"></block>
+       <block type="delay"></block> 
+    </category>
+    <category name='Sensor'>
+       <block type="ulstra"></block> 
+      <block type="touch_sensor"></block>
+
+    </category>
+    <category name='Move'>
+      <block type="servo_1"></block>
+      <block type="motor_both"></block>
+      <block type="motor_1"></block>
+      <block type="motor_2"></block>
+    </category>
+  </xml>
+
+</body>
+</html>
